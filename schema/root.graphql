@@ -1,0 +1,8 @@
+type Query {
+  _: Boolean
+  test: String
+}
+
+type Mutation {
+  _: Boolean
+}

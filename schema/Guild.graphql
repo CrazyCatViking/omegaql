@@ -1,0 +1,11 @@
+extend type Query {
+  guild: Guild!
+}
+
+type Guild {
+  polls: [Poll]
+}
+
+type Poll {
+  id: String
+}

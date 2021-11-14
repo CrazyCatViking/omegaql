@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+      "target": "ES2018",
+      "lib": ["ES2018", "DOM"],
+      "moduleResolution": "node",
+      "module": "commonjs",
+      "esModuleInterop": true,
+      "sourceMap": true,
+      "rootDir": ".",
+      "outDir": "dist",
+      "resolveJsonModule": true,
+      "baseUrl": ".",
+      "paths": {
+        "@/*": ["src/*"]
+      }
+    }
+  }
