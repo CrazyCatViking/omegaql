@@ -4,6 +4,6 @@ export const test = (root, args, { dataSources }) => {
   
 }
 
-export const guild = defineResolver((root, args, { dataSources: { GuildModel } }) => {
-  return GuildModel.getPolls();
+export const polls = defineResolver((_, args, { dataSources: { PollModel } }) => {
+  return PollModel.getPolls();
 });

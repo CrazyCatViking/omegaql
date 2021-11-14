@@ -3,9 +3,5 @@ extend type Query {
 }
 
 type Guild {
-  polls: [Poll]
-}
-
-type Poll {
   id: String
 }

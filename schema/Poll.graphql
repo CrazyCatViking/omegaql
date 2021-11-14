@@ -1,0 +1,23 @@
+extend type Query {
+  polls: [Poll!]
+}
+
+type Poll {
+  id: String!
+  mode: String!
+  description: String!
+  options: [String!]
+  status: PollStatus!
+  pollMessageData: PollMessageData
+}
+
+type PollMessageData {
+  messageId: String!
+  channelId: String!
+}
+
+enum PollStatus {
+  New
+  Posted
+  Ended
+}
