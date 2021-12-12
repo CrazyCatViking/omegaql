@@ -1,11 +1,6 @@
 import { Collection, Db } from "mongodb";
 import { getConnection } from "../src/mongoClient";
 
-export interface IDocumentInput {
-  document: Record<string, unknown>,
-  documentId: string,
-};
-
 export default class MongoDbSource {
   db: Db;
   collectionId: string;
@@ -32,6 +27,15 @@ export default class MongoDbSource {
     return !!collections.find((collection: Collection) => collection.collectionName === collectionId);
   }
 
+  protected async hasDocument(documentId: string) {
+    const collection = await this.getCollection();
+    const query = { id: documentId };
+
+    const document = await collection.findOne(query);
+
+    return !!document;
+  }
+
   protected async getDocument(documentId: string) {
     const collection = await this.getCollection();
     const query = { id: documentId };
@@ -41,7 +45,7 @@ export default class MongoDbSource {
     return document;
   }
 
-  protected async insertDocument({ document, documentId }: IDocumentInput) {
+  protected async insertDocument(documentId: string, document: Record<string, unknown>) {
     const collection = await this.getCollection();
     const documentInput = {
       ...document,
@@ -51,20 +55,17 @@ export default class MongoDbSource {
     return await collection.insertOne(documentInput);
   }
 
-  protected async updateDocument({ document, documentId }: IDocumentInput) {
+  protected async updateDocument(documentId: string, field: Record<string, unknown>) {
     const collection = await this.getCollection();
-    const documentInput = {
-      ...document,
-      id: documentId,
-    }
-    const query = { query: { id: documentId } };
 
-    return await collection.updateOne(query, {$set: { document: documentInput } });
+    const query = { id: documentId };
+
+    return await collection.updateOne(query, { $set: field });
   }
 
   protected async deleteDocument(documentId: string) {
     const collection = await this.getCollection();
-    const query = { query: {id: documentId} };
+    const query = { id: documentId };
 
     return await collection.deleteOne(query);
   }

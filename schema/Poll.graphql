@@ -2,6 +2,13 @@ extend type Query {
   polls: [Poll!]
 }
 
+extend type Mutation {
+  createPoll(input: PollInput!): [Poll!]!
+  updatePoll(input: PollInput!): Poll!
+  deletePoll(id: String): Boolean!
+  enablePollExtension: Boolean!
+}
+
 type Poll {
   id: String!
   mode: String!
@@ -12,6 +19,20 @@ type Poll {
 }
 
 type PollMessageData {
+  messageId: String!
+  channelId: String!
+}
+
+input PollInput {
+  id: String!
+  mode: String!
+  description: String!
+  options: [String!]
+  status: PollStatus!
+  pollMessageData: PollMessageDataInput
+}
+
+input PollMessageDataInput {
   messageId: String!
   channelId: String!
 }
