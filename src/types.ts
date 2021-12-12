@@ -1,5 +1,7 @@
-import OmegaDb from "dataSources/OmegaDb";
+import FFXIVApi from "../dataSources/FFXIVApi";
+import OmegaDb from "../dataSources/OmegaDb";
 import AuthModel from "./models/AuthModel";
+import FFXIVModel from "./models/FFXIVModel";
 import GuildModel from "./models/GuildModel";
 import PollModel from "./models/PollModel";
 
@@ -11,12 +13,14 @@ enum PollStatus {
 
 export interface IServices {
   OmegaDb: OmegaDb,
+  FFXIVApi: FFXIVApi
 }
 
 export interface IModels {
   AuthModel: AuthModel,
   GuildModel: GuildModel,
   PollModel: PollModel,
+  FFXIVModel: FFXIVModel,
 }
 
 export type IDataSources = IServices & IModels;

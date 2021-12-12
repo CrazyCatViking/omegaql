@@ -1,9 +1,14 @@
+import { IGetCharacterParams } from "@/models/FFXIVModel";
 import { defineResolver } from "./helpers"
-
-export const test = (root, args, { dataSources }) => {
-  
-}
 
 export const polls = defineResolver((_, args, { dataSources: { PollModel } }) => {
   return PollModel.getPolls();
+});
+
+export const getCharacter = defineResolver((_, { input }: { input:  IGetCharacterParams }, { dataSources: { FFXIVModel } }) => {
+  return FFXIVModel.getCharacter(input);
+});
+
+export const findCharacter = defineResolver((_, { name, server }: { name: string, server: string }, { dataSources: { FFXIVModel } }) => {
+  return FFXIVModel.findCharacter(name, server);
 });
