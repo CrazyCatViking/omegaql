@@ -4,15 +4,113 @@ extend type Query {
 }
 
 type FFXIVCharacter {
+  id: Int!
   name: String!
+  title: String!
+  activeJob: Int!
+  avatar: String!
+  jobs: [Job!]
+  freeCompany: FreeCompany!
+  grandCompany: GrandCompany!
+  guardianDeity: String!
+  gear:  [Gear!]
+
+  mounts: MountResult!
+  minions: MinionResult!
+
+  server: String!
 }
 
 type FFXIVChrSearchResult {
   totalCount: Int!
 }
 
+type Job {
+  className: String!
+  jobName: String!
+
+  classId: Int!
+  jobId: Int!
+  expLevel: Int!
+  expLevelMax: Int!
+  level: Int!
+
+  specialised: Boolean!
+  jobUnlocked: Boolean! 
+}
+
+type Gear {
+  type: GearType!
+  id: Int!
+  icon: String!
+  name: String!
+  itemLevel: Int!
+  materia: [Materia!]
+  glamour: Glamour
+}
+
+type MinionResult {
+  items: [Minion!]
+  ownedMinions: Int!
+  totalMinions: Int!
+}
+
+type MountResult {
+  items: [Mount!]
+  ownedMounts: Int!
+  totalMounts: Int!
+}
+
+type Glamour {
+  id: Int!
+  name: String!
+}
+
+type Minion {
+  id: Int!
+  name: String!
+}
+
+type Mount {
+  id: Int!
+  name: String!
+}
+
+type Materia {
+  id: Int!
+  name: String!
+  icon: String!
+}
+
+type FreeCompany {
+  id: Int!
+  name: String!
+}
+
+type GrandCompany {
+  name: String!
+  rank: String!
+}
+
 input FFXIVGetChrInput {
   id: Int
   name: String
   server: String
+  data: String
+}
+
+enum GearType {
+  MainHand
+  OffHand
+  Head
+  Body
+  Hands
+  Legs
+  Feet
+  Bracelets
+  Earrings
+  Necklace
+  Ring1
+  Ring2
+  SoulCrystal
 }
