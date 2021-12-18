@@ -4,6 +4,7 @@ export const id = defineResolver((obj) => obj.Character.ID);
 export const name = defineResolver((obj) => obj.Character.Name);
 export const title = defineResolver((obj) => obj.Character.Title.Name);
 export const avatar = defineResolver((obj) => obj.Character.Avatar);
+export const portrait = defineResolver((obj) => obj.Character.Portrait);
 export const jobs = defineResolver((obj) => {
   return obj.Character.ClassJobs?.filter((item: any) => item.Class !== null);
 });

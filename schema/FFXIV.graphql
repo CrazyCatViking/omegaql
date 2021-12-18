@@ -9,6 +9,7 @@ type FFXIVCharacter {
   title: String!
   activeJob: Int!
   avatar: String!
+  portrait: String!
   jobs: [Job!]
   freeCompany: FreeCompany!
   grandCompany: GrandCompany!
