@@ -5,7 +5,8 @@
     "main": "src/main.ts",
     "author": "Kristoffer Jansen",
     "scripts": {
-        "serve": "ts-node-dev --require dotenv/config src/index.ts"
+        "serve": "ts-node-dev --require dotenv/config src/index.ts",
+        "build": "tsc -p tsconfig.build.json && cp -r schema dist/"
     },
     "dependencies": {
         "@graphql-tools/links": "^8.2.1",
