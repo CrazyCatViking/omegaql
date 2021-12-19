@@ -48,3 +48,8 @@ export interface IPollMessageData {
   messageId?: string;
   channelId?: string;
 }
+
+export interface IFFXIVInput {
+  discordId: string;
+  ffxivId: string;
+}

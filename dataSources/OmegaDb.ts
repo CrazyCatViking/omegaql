@@ -20,4 +20,20 @@ export default class OmegaDb extends MongoDbSource {
   public async updatePolls(input: Record<string, unknown>) {
     return await this.updateDocument('extension/pollExtension', { polls: input });
   }
+
+  public async getFFXIVCharacters() {
+    return await this.getDocument('extension/ffxivExtension');
+  }
+
+  public async ffxivExtensionIsEnabled() {
+    return await this.hasDocument('extension/ffxivExtension');
+  }
+
+  public async enableFFXIVExtension(input: Record<string, unknown>) {
+    return await this.insertDocument('extension/ffxivExtension', input);
+  }
+
+  public async updateFFXIVCharacters(input: Record<string, unknown>) {
+    return await this.updateDocument('extension/ffxivExtension', { profiles: input });
+  }
 }

@@ -3,6 +3,11 @@ extend type Query {
   findCharacter(name: String, server: String): FFXIVChrSearchResult
 }
 
+extend type Mutation {
+  setCharacter(discordId: String!, ffxivId: Int!): Boolean!
+  enableExtension: Boolean!
+}
+
 type FFXIVCharacter {
   id: Int!
   name: String!
@@ -24,6 +29,7 @@ type FFXIVCharacter {
 
 type FFXIVChrSearchResult {
   totalCount: Int!
+  items: [FFXIVCharacter!]
 }
 
 type Job {
@@ -94,7 +100,7 @@ type GrandCompany {
 }
 
 input FFXIVGetChrInput {
-  id: Int
+  discordId: String
   name: String
   server: String
   data: String
