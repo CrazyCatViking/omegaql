@@ -8,6 +8,7 @@ import { execute, subscribe } from 'graphql';
 import { mongoDbConnect } from './mongoClient';
 import { makeSchema } from './schema';
 import context from './context';
+import { redisConnect } from './cache';
 
 const PORT = process.env.OMEGAQL_PORT;
 
@@ -16,6 +17,7 @@ const schema = makeSchema();
 
 const startServer = async () => {
   await mongoDbConnect();
+  await redisConnect();
 
   app.use(
     '/graphql',
