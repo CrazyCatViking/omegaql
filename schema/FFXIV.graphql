@@ -12,7 +12,7 @@ type FFXIVCharacter {
   id: Int!
   name: String!
   title: String!
-  activeJob: Int!
+  activeJob: Int
   avatar: String!
   portrait: String!
   jobs: [Job!]
