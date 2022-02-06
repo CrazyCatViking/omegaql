@@ -1,11 +1,17 @@
 extend type Query {
   guild: Guild!
+  guilds: GuildResult!
 }
 
 extend type Mutation {
   createGuildConnection: Guild!
 }
 
+type GuildResult {
+  items: [Guild!]
+}
+
 type Guild {
-  id: String
+  id: String!
+  name: String!
 }

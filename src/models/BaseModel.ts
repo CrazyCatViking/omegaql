@@ -1,4 +1,5 @@
 import { IServices } from "@/types";
+import DiscordApi from "dataSources/DiscordApi";
 import FFXIVApi from "dataSources/FFXIVApi";
 import OmegaDb from "dataSources/OmegaDb";
 
@@ -15,5 +16,9 @@ export default class BaseModel {
   
   protected get FFXIVApi(): FFXIVApi {
     return this.services.FFXIVApi;
+  }
+
+  protected get DiscordApi(): DiscordApi {
+    return this.services.DiscordApi;
   }
 }

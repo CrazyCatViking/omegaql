@@ -1,0 +1,17 @@
+extend type Query {
+  user: User!
+}
+
+extend type Mutation {
+  login(authCode: String!): LoginResult
+}
+
+type LoginResult {
+  user: String!
+  guilds: [String!]!
+}
+
+type User {
+  id: String!
+  username: String!
+}

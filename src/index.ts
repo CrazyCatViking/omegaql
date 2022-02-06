@@ -21,9 +21,9 @@ const startServer = async () => {
 
   app.use(
     '/graphql',
-    graphqlHTTP((req) => ({
+    graphqlHTTP((req, res) => ({
       schema,
-      context: context(req),
+      context: context(req, res),
     })),
   );
 

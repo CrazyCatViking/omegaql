@@ -1,3 +1,4 @@
+import DiscordApi from "dataSources/DiscordApi";
 import FFXIVApi from "../dataSources/FFXIVApi";
 import OmegaDb from "../dataSources/OmegaDb";
 import AuthModel from "./models/AuthModel";
@@ -14,6 +15,7 @@ enum PollStatus {
 export interface IServices {
   OmegaDb: OmegaDb,
   FFXIVApi: FFXIVApi
+  DiscordApi: DiscordApi,
 }
 
 export interface IModels {
@@ -26,11 +28,13 @@ export interface IModels {
 export type IDataSources = IServices & IModels;
 
 export interface IAuthTokens {
-  discordToken: string,
+  discordToken: Record<string, any>,
   dbContext: string,
 }
 
 export interface IContext {
+  req: any,
+  res: any,
   decodedTokens: IAuthTokens;
   dataSources: IDataSources;
 }

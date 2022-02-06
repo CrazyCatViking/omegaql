@@ -12,3 +12,11 @@ export const getCharacter = defineResolver((_, { input }: { input:  IGetCharacte
 export const findCharacter = defineResolver((_, { name, server }: { name: string, server: string }, { dataSources: { FFXIVModel } }) => {
   return FFXIVModel.findCharacter(name, server);
 });
+
+export const user = defineResolver((_, args, { dataSources: { AuthModel } }) => {
+  return AuthModel.getUser();
+});
+
+export const guilds = defineResolver((_, args, { dataSources: { GuildModel } }) => {
+  return GuildModel.getGuilds();
+});

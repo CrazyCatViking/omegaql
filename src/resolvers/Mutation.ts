@@ -24,3 +24,12 @@ export const setCharacter = defineResolver((_, args: IFFXIVInput, { dataSources:
 export const enableExtension = defineResolver((_, args, { dataSources: { FFXIVModel } }) => {
   return FFXIVModel.enableExtensions();
 });
+
+export const login = defineResolver(async (_, { authCode }, { res, dataSources: { AuthModel } }) => {
+  const authToken = await AuthModel.login(authCode);
+  res.cookie('authToken', authToken);
+
+  return {
+    user: 'test',
+  };
+}); 
