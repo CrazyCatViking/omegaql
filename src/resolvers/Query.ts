@@ -13,8 +13,9 @@ export const findCharacter = defineResolver((_, { name, server }: { name: string
   return FFXIVModel.findCharacter(name, server);
 });
 
-export const user = defineResolver((_, args, { dataSources: { AuthModel } }) => {
-  return AuthModel.getUser();
+export const self = defineResolver((_, args, { dataSources: { AuthModel }, decodedTokens }) => {
+  if (!decodedTokens.discordToken) return undefined;
+  return AuthModel.getSelf();
 });
 
 export const guilds = defineResolver((_, args, { dataSources: { GuildModel } }) => {

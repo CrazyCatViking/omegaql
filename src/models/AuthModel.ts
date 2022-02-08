@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import BaseModel from './BaseModel';
 
 const ClientSecret = process.env.CLIENT_SECRET;
-const TokenValidTime = '30m';
+const TokenValidTime = '8h';
 
 export default class AuthModel extends BaseModel {
   public async login(authCode: string) {
@@ -16,7 +16,7 @@ export default class AuthModel extends BaseModel {
     return jwt.sign(authTokens, ClientSecret, { expiresIn: TokenValidTime });
   }
 
-  public async getUser() {
+  public async getSelf() {
     return await this.DiscordApi.getUserInfo();
   }
 

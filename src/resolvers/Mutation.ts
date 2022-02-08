@@ -29,7 +29,5 @@ export const login = defineResolver(async (_, { authCode }, { res, dataSources: 
   const authToken = await AuthModel.login(authCode);
   res.cookie('authToken', authToken);
 
-  return {
-    user: 'test',
-  };
+  return true;
 }); 

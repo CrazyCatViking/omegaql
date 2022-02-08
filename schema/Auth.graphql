@@ -1,17 +1,12 @@
 extend type Query {
-  user: User!
+  self: Self
 }
 
 extend type Mutation {
-  login(authCode: String!): LoginResult
+  login(authCode: String!): Boolean
 }
 
-type LoginResult {
-  user: String!
-  guilds: [String!]!
-}
-
-type User {
+type Self {
   id: String!
   username: String!
 }
