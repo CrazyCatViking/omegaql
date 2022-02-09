@@ -13,7 +13,7 @@ export const redisConnect = async () => {
 };
 
 export const useCache = (lifetime: number) => {
-  const getData = async (key: string, dataAccessor: () => Promise<unknown>) => {
+  const getCacheData = async (key: string, dataAccessor: () => Promise<unknown>) => {
     const data = await client.get(key);
 
     if (data) return JSON.parse(data);
@@ -24,9 +24,19 @@ export const useCache = (lifetime: number) => {
     return newData;
   };
 
-  const setData = async (key: string, data: unknown) => {
+  const setData = async(key: string, data: unknown) => {
+    await client.set(key, JSON.stringify(data));
+  }
+
+  const setExData = async (key: string, data: unknown) => {
     await client.setEx(key, lifetime, JSON.stringify(data));
   };
+
+  const getData = async(key: string) => {
+    const data = await client.get(key);
+    if (!data) return undefined;
+    return JSON.parse(data);
+  }
 
   const invalidateCache = async (key: string) => {
     await client.del(key);
@@ -34,8 +44,10 @@ export const useCache = (lifetime: number) => {
 
   return {
     client,
+    getCacheData,
     getData,
     setData,
+    setExData,
     invalidateCache,
   };
 };

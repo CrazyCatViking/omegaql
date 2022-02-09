@@ -6,7 +6,16 @@ export default class DiscordApi extends RESTSource {
   token: Record<string, any>;
 
   constructor(authToken: Record<string, any>) {
-    super(DISCORD_API_URL, { authorization: `${authToken?.token_type} ${authToken?.access_token}` });
+    super(
+      DISCORD_API_URL, 
+      { authorization: `${authToken?.token_type} ${authToken?.access_token}` },
+      {
+        cacheOptions: {
+          useCache: true,
+          cacheLifetime: 60,
+        },
+      }
+    );
     this.token = authToken;
   }
 
@@ -15,7 +24,7 @@ export default class DiscordApi extends RESTSource {
     const discordRedirectUrl = process.env.DISCORD_REDIRECT_URL;
     const discordClientId = process.env.DISCORD_CLIENT_ID;
 
-    const args = {
+    const params = {
       client_id: discordClientId,
       client_secret: discordClientSecret,
       code: authCode,
@@ -24,14 +33,14 @@ export default class DiscordApi extends RESTSource {
       scope: 'identify guilds',
     };
 
-    return await this.post('oauth2/token', args);
+    return await this.post({ url: 'oauth2/token', params }, { cachePolicy: 'no-cache' });
   }
 
   public async getUserInfo() {
-    return this.get('users/@me');
+    return this.get({ url: 'users/@me' });
   }
 
   public async getGuilds() {
-    return this.get('users/@me/guilds');
+    return this.get({ url: 'users/@me/guilds' });
   }
 }

@@ -31,3 +31,10 @@ export const login = defineResolver(async (_, { authCode }, { res, dataSources: 
 
   return true;
 }); 
+
+export const changeGuildContext = defineResolver(async (_, { guildId }, { dataSources: { AuthModel }, res, decodedTokens} ) => {
+  const authToken = await AuthModel.changeGuildContext(decodedTokens, guildId);
+  res.cookie('authToken', authToken);
+
+  return true;
+});

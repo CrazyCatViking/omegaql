@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken';
 import BaseModel from './BaseModel';
 
 const ClientSecret = process.env.CLIENT_SECRET;
-const TokenValidTime = '8h';
+const TokenValidTime = '8h'; // This needs to be changed, use redis to invalidate tokens?
 
 export default class AuthModel extends BaseModel {
   public async login(authCode: string) {
@@ -18,6 +18,15 @@ export default class AuthModel extends BaseModel {
 
   public async getSelf() {
     return await this.DiscordApi.getUserInfo();
+  }
+
+  public async changeGuildContext(authTokens: IAuthTokens, guildId: bigint) {
+    const newTokens = {
+      ...authTokens,
+      dbContext: guildId.toString(),
+    };
+
+    return jwt.sign(newTokens, ClientSecret);
   }
 
   public static decodeToken(token: string) {

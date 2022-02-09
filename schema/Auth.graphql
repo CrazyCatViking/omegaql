@@ -4,9 +4,13 @@ extend type Query {
 
 extend type Mutation {
   login(authCode: String!): Boolean
+  changeGuildContext(guildId: HashId!): Boolean
 }
 
 type Self {
   id: String!
   username: String!
+
+  guildContext: Guild
+  availableGuilds: [Guild!]
 }

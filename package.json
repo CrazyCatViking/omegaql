@@ -22,7 +22,7 @@
         "graphql-tag": "^2.12.5",
         "graphql-tools": "^8.2.0",
         "graphql-ws": "^5.5.5",
-        "hashids": "^2.2.8",
+        "hashids": "^2.2.10",
         "jsonwebtoken": "^8.5.1",
         "mongodb": "^4.1.4",
         "redis": "^4.0.1",

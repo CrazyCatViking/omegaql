@@ -12,6 +12,6 @@ type GuildResult {
 }
 
 type Guild {
-  id: String!
+  id: HashId!
   name: String!
 }

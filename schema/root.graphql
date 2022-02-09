@@ -6,3 +6,5 @@ type Query {
 type Mutation {
   _: Boolean
 }
+
+scalar HashId

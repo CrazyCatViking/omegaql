@@ -122,10 +122,10 @@ export default class FFXIVApiSource {
   }
 
   private async getData(keyParams: string | unknown[], apiCall: () => Promise<unknown>) {
-    const { getData } = useCache(this.cahceLifetime);
+    const { getCacheData } = useCache(this.cahceLifetime);
     const key = this.getCacheKey(keyParams)
 
-    return await getData(key, apiCall);
+    return await getCacheData(key, apiCall);
   }
 
   private getCacheKey(keyParams: string | unknown[]): string {
