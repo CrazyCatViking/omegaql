@@ -7,23 +7,23 @@ const TokenValidTime = '8h'; // This needs to be changed, use redis to invalidat
 
 export default class AuthModel extends BaseModel {
   public async login(authCode: string) {
-    const discordToken = await this.DiscordApi.login(authCode);
+    const discordUserToken = await this.DiscordUserApi.login(authCode);
 
     const authTokens = {
-      discordToken,
+      discordUserToken,
     };
 
     return jwt.sign(authTokens, ClientSecret, { expiresIn: TokenValidTime });
   }
 
   public async getSelf() {
-    return await this.DiscordApi.getUserInfo();
+    return await this.DiscordUserApi.getUserInfo();
   }
 
   public async changeGuildContext(authTokens: IAuthTokens, guildId: bigint) {
     const newTokens = {
       ...authTokens,
-      dbContext: guildId.toString(),
+      guildContext: guildId.toString(),
     };
 
     return jwt.sign(newTokens, ClientSecret);

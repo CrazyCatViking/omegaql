@@ -14,4 +14,5 @@ type GuildResult {
 type Guild {
   id: HashId!
   name: String!
+  icon: String!
 }

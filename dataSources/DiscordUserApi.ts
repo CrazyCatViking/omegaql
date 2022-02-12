@@ -2,7 +2,7 @@ import RESTSource from "./RESTSource";
 
 const DISCORD_API_URL = 'https://discord.com/api';
 
-export default class DiscordApi extends RESTSource {
+export default class DiscordUserApi extends RESTSource {
   token: Record<string, any>;
 
   constructor(authToken: Record<string, any>) {

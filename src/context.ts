@@ -16,7 +16,13 @@ const getAuthorizationToken = (req: any) => {
 
 export default (req: any, res: any): IContext => {
   const jwtToken = getAuthorizationToken(req);
-  const decodedTokens = AuthModel.decodeToken(jwtToken);
+  const decodedTokens = {
+    ...AuthModel.decodeToken(jwtToken),
+    discordBotToken: {
+      access_token: process.env.DISCORD_BOT_TOKEN,
+      token_type: 'Bot', 
+    },
+  };
 
   return {
     req,

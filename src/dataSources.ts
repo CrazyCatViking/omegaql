@@ -2,18 +2,20 @@ import { IAuthTokens, IDataSources } from "./types";
 
 import OmegaDb from "../dataSources/OmegaDb";
 import FFXIVApi from "../dataSources/FFXIVApi";
-import DiscordApi from "../dataSources/DiscordApi";
+import DiscordUserApi from "../dataSources/DiscordUserApi";
+import DiscordBotApi from '../dataSources/DiscordBotApi';
 
 import GuildModel from "./models/GuildModel";
 import AuthModel from "./models/AuthModel";
 import PollModel from "./models/PollModel";
 import FFXIVModel from "./models/FFXIVModel";
 
-export default ({ discordToken, dbContext }: IAuthTokens): IDataSources => {
+export default ({ discordUserToken, discordBotToken, guildContext }: IAuthTokens): IDataSources => {
   const services = {
-    OmegaDb: new OmegaDb(dbContext),
+    OmegaDb: new OmegaDb(guildContext),
     FFXIVApi: new FFXIVApi(),
-    DiscordApi: new DiscordApi(discordToken),
+    DiscordUserApi: new DiscordUserApi(discordUserToken),
+    DiscordBotApi: new DiscordBotApi(discordBotToken, guildContext),
   };
 
   const models = {

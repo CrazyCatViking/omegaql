@@ -14,7 +14,7 @@ export const findCharacter = defineResolver((_, { name, server }: { name: string
 });
 
 export const self = defineResolver((_, args, { dataSources: { AuthModel }, decodedTokens }) => {
-  if (!decodedTokens.discordToken) return undefined;
+  if (!decodedTokens.discordUserToken) return undefined;
   return AuthModel.getSelf();
 });
 

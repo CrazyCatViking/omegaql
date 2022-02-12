@@ -3,8 +3,8 @@ import BaseModel from "./BaseModel";
 
 export default class PollModel extends BaseModel {
   public async getPolls() {
-    const { polls } = await this.OmegaDb.getPolls();
-    return polls;
+    const data = await this.OmegaDb.getPolls();
+    return data?.polls;
   }
 
   public async enablePollExtension() {

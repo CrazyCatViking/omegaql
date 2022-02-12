@@ -1,4 +1,5 @@
-import DiscordApi from "dataSources/DiscordApi";
+import DiscordUserApi from "dataSources/DiscordUserApi";
+import DiscordBotApi from 'dataSources/DiscordBotApi';
 import FFXIVApi from "../dataSources/FFXIVApi";
 import OmegaDb from "../dataSources/OmegaDb";
 import AuthModel from "./models/AuthModel";
@@ -13,28 +14,30 @@ enum PollStatus {
 }
 
 export interface IServices {
-  OmegaDb: OmegaDb,
-  FFXIVApi: FFXIVApi
-  DiscordApi: DiscordApi,
+  OmegaDb: OmegaDb;
+  FFXIVApi: FFXIVApi;
+  DiscordUserApi: DiscordUserApi;
+  DiscordBotApi: DiscordBotApi;
 }
 
 export interface IModels {
-  AuthModel: AuthModel,
-  GuildModel: GuildModel,
-  PollModel: PollModel,
-  FFXIVModel: FFXIVModel,
+  AuthModel: AuthModel;
+  GuildModel: GuildModel;
+  PollModel: PollModel;
+  FFXIVModel: FFXIVModel;
 }
 
 export type IDataSources = IServices & IModels;
 
 export interface IAuthTokens {
-  discordToken: Record<string, any>,
-  dbContext: string,
+  discordUserToken: Record<string, any>;
+  discordBotToken: Record<string, string>;
+  guildContext: string;
 }
 
 export interface IContext {
-  req: any,
-  res: any,
+  req: any;
+  res: any;
   decodedTokens: IAuthTokens;
   dataSources: IDataSources;
 }
