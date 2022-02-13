@@ -10,3 +10,7 @@ const lazyResolve = (fieldName: string) => defineResolver(async (obj, args, { da
 
 export const name = lazyResolve('name');
 export const icon = lazyResolve('icon');
+export const hasBot = defineResolver(async (obj, _, { dataSources: { GuildModel }}) => {
+  const botGuilds = await GuildModel.getBotGuilds();
+  return !!botGuilds.find((item: any) => item.id === obj.id);
+});

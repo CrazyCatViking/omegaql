@@ -33,7 +33,7 @@ export default class DiscordUserApi extends RESTSource {
       scope: 'identify guilds',
     };
 
-    return await this.post({ url: 'oauth2/token', params }, { cachePolicy: 'no-cache' });
+    return await this.post({ url: 'oauth2/token', params });
   }
 
   public async getUserInfo() {

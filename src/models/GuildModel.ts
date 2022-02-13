@@ -6,6 +6,10 @@ export default class GuildModel extends BaseModel {
     return { items: data };
   }
 
+  public async getBotGuilds(): Promise<any[]> {
+    return this.DiscordBotApi.getGuilds();
+  }
+
   public async getGuild() {
     const guild = await this.DiscordBotApi.getGuild();
     const discordCdn = process.env.DISCORD_CDN;

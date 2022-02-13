@@ -54,7 +54,7 @@ export default class RESTSource {
     }
   }
 
-  protected async post({ url, params }: IRESTParams, cacheSettings?: ICacheSettings) {
+  protected async post({ url, params }: IRESTParams) {
     const postMethod = async () => (await axios({
       url: `${this.baseUrl}/${url}`,
       method: 'post',
@@ -65,13 +65,13 @@ export default class RESTSource {
     })).data;
 
     try {
-      return await this.getData([this.headers, url, params], postMethod, cacheSettings);;
+      return postMethod();
     } catch (error: any) {
       throw (error.response.data);
     }
   }
 
-  protected async put({ url, params }: IRESTParams, cacheSettings?: ICacheSettings) {
+  protected async put({ url, params }: IRESTParams) {
     const putMethod = async () => (await axios({
       url: `${this.baseUrl}/${url}`,
       method: 'put',
@@ -82,7 +82,7 @@ export default class RESTSource {
     })).data;
 
     try {
-      return await this.getData([this.headers, url, params], putMethod, cacheSettings);;
+      return putMethod();
     } catch (error: any) {
       throw (error.response.data);
     }

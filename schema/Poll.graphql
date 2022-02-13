@@ -13,7 +13,7 @@ type Poll {
   id: String!
   mode: String!
   description: String!
-  options: [String!]
+  options: [PollOption!]
   status: PollStatus!
   pollMessageData: PollMessageData
 }
@@ -21,6 +21,11 @@ type Poll {
 type PollMessageData {
   messageId: String!
   channelId: String!
+}
+
+type PollOption {
+  name: String!
+  votes: Int
 }
 
 input PollInput {

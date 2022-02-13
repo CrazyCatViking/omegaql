@@ -15,4 +15,5 @@ type Guild {
   id: HashId!
   name: String!
   icon: String!
+  hasBot: Boolean!
 }

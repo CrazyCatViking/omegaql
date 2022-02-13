@@ -1,4 +1,4 @@
-import { IPollInput } from "@/types";
+import { IPollInput, IPollMessageData } from "@/types";
 import BaseModel from "./BaseModel";
 
 export default class PollModel extends BaseModel {
@@ -62,5 +62,10 @@ export default class PollModel extends BaseModel {
     const res = await this.OmegaDb.updatePolls(polls);
     
     return !!res.modifiedCount;
+  }
+
+  public async getPollVotes(pollMessageData: IPollMessageData) {
+    const data = await this.DiscordBotApi.getPollVotes(pollMessageData);
+    return data.reactions.map((item: any) => item.count - 1);
   }
 }

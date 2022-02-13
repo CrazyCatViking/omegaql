@@ -15,4 +15,4 @@ export const availableGuilds = defineResolver(async (obj, _, { dataSources: { Gu
 export const avatar = defineResolver((obj) => {
   const discordCdn = process.env.DISCORD_CDN;
   return `${discordCdn}/avatars/${obj.id}/${obj.avatar}.png`;
-})
+});
