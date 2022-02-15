@@ -1,4 +1,3 @@
-import dataSources from "@/dataSources";
 import { defineResolver } from "../helpers";
 
 export const options = defineResolver(async (obj, _, { dataSources: { PollModel } }) => {
