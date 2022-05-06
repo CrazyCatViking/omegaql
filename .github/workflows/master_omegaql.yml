@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'OmegaQL'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2968DCFDD27D4475AEAE3A792E2540F0 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9B581B77E5EC463CAF381E89E3318A71 }}
           package: .
