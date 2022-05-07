@@ -3,7 +3,13 @@ import { createClient, RedisClientType } from 'redis';
 let client: RedisClientType<any>;
 
 export const redisConnect = async () => {
-  client = createClient();
+  const cacheHostName = process.env.REDIS_HOST_NAME;
+  const cacheKey = process.env.REDIS_CACHE_KEY;
+
+  client = createClient({
+    url: `rediss://${cacheHostName}:6380`,
+    password: cacheKey,
+  });
 
   client.on('error', (error) => {
     console.log(error);
