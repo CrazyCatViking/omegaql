@@ -53,4 +53,4 @@ jobs:
           app-name: 'OmegaQL'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9B581B77E5EC463CAF381E89E3318A71 }}
-          package: .
+          package: './dist'
