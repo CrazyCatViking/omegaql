@@ -2,7 +2,7 @@
     "name": "omegaql",
     "version": "1.0.0",
     "description": "GraphQL backend for omega-next and new omega gui",
-    "main": "src/main.ts",
+    "main": "dist/src/index.js",
     "author": "Kristoffer Jansen",
     "scripts": {
         "serve": "ts-node-dev --require dotenv/config src/index.ts",
