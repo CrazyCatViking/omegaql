@@ -27,14 +27,14 @@ export const enableExtension = defineResolver((_, args, { dataSources: { FFXIVMo
 
 export const login = defineResolver(async (_, { authCode }, { res, dataSources: { AuthModel } }) => {
   const authToken = await AuthModel.login(authCode);
-  res.cookie('authToken', authToken);
+  res.cookie('authToken', authToken, { domain: process.env.DOMAIN_NAME, secure: true, httpOnly: true });
 
   return true;
 }); 
 
 export const changeGuildContext = defineResolver(async (_, { guildId }, { dataSources: { AuthModel, GuildModel }, res, decodedTokens} ) => {
   const authToken = await AuthModel.changeGuildContext(decodedTokens, guildId);
-  res.cookie('authToken', authToken);
+  res.cookie('authToken', authToken, { domain: process.env.DOMAIN_NAME, secure: true, httpOnly: true });
 
   return true;
 });
