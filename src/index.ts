@@ -41,7 +41,7 @@ const startServer = async () => {
       path: '/subscriptions',
     });
 
-    console.log('Server ready');
+    console.log(`Server ready on port: ${PORT}`);
   });
 }
 
