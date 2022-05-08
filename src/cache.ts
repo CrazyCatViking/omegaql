@@ -15,6 +15,12 @@ export const redisConnect = async () => {
     console.log(error);
   });
 
+  const minToMilis = (min: number) => min * 60 * 1000;
+
+  setInterval(() => {
+    client.ping();
+  }, minToMilis(5));
+
   await client.connect(); // Connects to localhost:6379
 };
 
