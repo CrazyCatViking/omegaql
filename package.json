@@ -15,6 +15,7 @@
         "@types/jsonwebtoken": "^8.5.5",
         "@xivapi/nodestone": "^0.2.1",
         "axios": "^0.25.0",
+        "cors": "^2.8.5",
         "express": "^4.17.1",
         "express-graphql": "^0.12.0",
         "graphql": "^15.0.0",
@@ -31,6 +32,7 @@
         "xivapi-js": "^0.3.0"
     },
     "devDependencies": {
+        "@types/cors": "^2.8.12",
         "@types/node": "^16.7.10",
         "dotenv": "^10.0.0",
         "ts-node-dev": "^1.1.8"
