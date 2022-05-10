@@ -4,6 +4,7 @@ import OmegaDb from "../dataSources/OmegaDb";
 import FFXIVApi from "../dataSources/FFXIVApi";
 import DiscordUserApi from "../dataSources/DiscordUserApi";
 import DiscordBotApi from '../dataSources/DiscordBotApi';
+import TwitchDataSource from '../dataSources/TwitchDataSource';
 
 import GuildModel from "./models/GuildModel";
 import AuthModel from "./models/AuthModel";
@@ -16,6 +17,7 @@ export default ({ discordUserToken, discordBotToken, guildContext }: IAuthTokens
     FFXIVApi: new FFXIVApi(),
     DiscordUserApi: new DiscordUserApi(discordUserToken),
     DiscordBotApi: new DiscordBotApi(discordBotToken, guildContext),
+    TwitchDataSource: new TwitchDataSource(),
   };
 
   const models = {
