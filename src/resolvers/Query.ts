@@ -21,3 +21,7 @@ export const self = defineResolver((_, args, { dataSources: { AuthModel }, decod
 export const guilds = defineResolver((_, args, { dataSources: { GuildModel } }) => {
   return GuildModel.getGuilds();
 });
+
+export const twitchStreams = defineResolver((_, args, { dataSources: { TwitchModel } }) => {
+  return TwitchModel.getStreams();
+});

@@ -6,6 +6,8 @@ import AuthModel from "./models/AuthModel";
 import FFXIVModel from "./models/FFXIVModel";
 import GuildModel from "./models/GuildModel";
 import PollModel from "./models/PollModel";
+import TwitchApi from "dataSources/TwitchApi";
+import TwitchModel from "./models/TwitchModel";
 
 enum PollStatus {
   New,
@@ -18,6 +20,7 @@ export interface IServices {
   FFXIVApi: FFXIVApi;
   DiscordUserApi: DiscordUserApi;
   DiscordBotApi: DiscordBotApi;
+  TwitchApi: TwitchApi;
 }
 
 export interface IModels {
@@ -25,6 +28,7 @@ export interface IModels {
   GuildModel: GuildModel;
   PollModel: PollModel;
   FFXIVModel: FFXIVModel;
+  TwitchModel: TwitchModel;
 }
 
 export type IDataSources = IServices & IModels;
@@ -33,6 +37,7 @@ export interface IAuthTokens {
   discordUserToken: Record<string, any>;
   discordBotToken: Record<string, string>;
   guildContext: string;
+  twitchToken: string;
 }
 
 export interface IContext {

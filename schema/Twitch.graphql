@@ -1,0 +1,16 @@
+extend type Query {
+  twitchStreams: TwitchStreamResults
+}
+
+type TwitchStreamResults {
+  items: [TwitchStream!]
+  totalCount: Int!
+}
+
+type TwitchStream {
+  streamer: Streamer!
+}
+
+type Streamer {
+  name: String!
+}

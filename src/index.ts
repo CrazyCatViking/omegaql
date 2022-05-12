@@ -10,6 +10,7 @@ import { mongoDbConnect } from './mongoClient';
 import { makeSchema } from './schema';
 import context from './context';
 import { redisConnect } from './cache';
+import { twitchConnect } from './twitch';
 
 const PORT = process.env.OMEGAQL_PORT;
 const BASE_URL = `www.${process.env.DOMAIN_NAME}`
@@ -20,12 +21,13 @@ const schema = makeSchema();
 const startServer = async () => {
   await mongoDbConnect();
   await redisConnect();
+  await twitchConnect();
 
   app.use(
     '/graphql',
-    graphqlHTTP((req, res) => ({
+    graphqlHTTP(async (req, res) => ({
       schema,
-      context: context(req, res),
+      context: await context(req, res),
     })),
   );
 

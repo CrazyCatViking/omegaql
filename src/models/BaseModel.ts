@@ -3,6 +3,7 @@ import DiscordUserApi from "dataSources/DiscordUserApi";
 import DiscordBotApi from 'dataSources/DiscordBotApi';
 import FFXIVApi from "dataSources/FFXIVApi";
 import OmegaDb from "dataSources/OmegaDb";
+import TwitchApi from "dataSources/TwitchApi";
 
 export default class BaseModel {
   services: IServices;
@@ -25,5 +26,9 @@ export default class BaseModel {
 
   protected get DiscordBotApi(): DiscordBotApi {
     return this.services.DiscordBotApi;
+  }
+
+  protected get TwitchApi(): TwitchApi {
+    return this.services.TwitchApi;
   }
 }
