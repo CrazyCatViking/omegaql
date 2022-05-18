@@ -7,4 +7,8 @@ type Mutation {
   _: Boolean
 }
 
+type Subscription {
+  _: Boolean
+}
+
 scalar HashId

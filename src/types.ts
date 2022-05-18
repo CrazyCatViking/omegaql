@@ -47,6 +47,13 @@ export interface IContext {
   dataSources: IDataSources;
 }
 
+export interface IWsContext {
+  req: any;
+  socket: any;
+  decodedTokens: IAuthTokens;
+  dataSources: IDataSources;
+}
+
 export interface IPollInput extends Record<string, unknown> {
   id: string;
   mode: string;

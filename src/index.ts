@@ -2,8 +2,6 @@ import express from 'express';
 import cors from 'cors';
 import expressPlayground from 'graphql-playground-middleware-express';
 import { graphqlHTTP } from 'express-graphql';
-import { createServer } from 'http';
-import { SubscriptionServer } from 'subscriptions-transport-ws';
 import { execute, subscribe } from 'graphql';
 
 import { mongoDbConnect } from './mongoClient';
@@ -11,6 +9,9 @@ import { makeSchema } from './schema';
 import context from './context';
 import { redisConnect } from './cache';
 import { twitchConnect } from './twitch';
+import { useWebhooks } from './useWebhooks';
+import { useWebSockets } from './useWebSockets';
+import { createPubSub } from './useRedisPubSub';
 
 const PORT = process.env.OMEGAQL_PORT;
 const BASE_URL = `www.${process.env.DOMAIN_NAME}`
@@ -22,6 +23,7 @@ const startServer = async () => {
   await mongoDbConnect();
   await redisConnect();
   await twitchConnect();
+  createPubSub();
 
   app.use(
     '/graphql',
@@ -40,17 +42,13 @@ const startServer = async () => {
 
   app.get('/', expressPlayground({ endpoint: '/graphql' }));
 
-  const ws = createServer(app);
-
-  ws.listen(PORT, () => {
-    new SubscriptionServer({
+  const server = app.listen(PORT, () => {
+    useWebSockets(
+      server,
+      schema,
       execute,
       subscribe,
-      schema,
-    }, {
-      server: ws,
-      path: '/subscriptions',
-    });
+    );
 
     console.log(`Server ready on port: ${PORT}`);
   });

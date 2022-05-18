@@ -1,5 +1,6 @@
 import * as Query from './resolvers/Query';
 import * as Mutation from './resolvers/Mutation';
+import * as Subscription from './resolvers/Subscription';
 import * as Self from './resolvers/Self';
 import FFXIVResolvers from './resolvers/ffxivResolvers';
 import Discord from './resolvers/discord';
@@ -12,6 +13,7 @@ const resolvers = {
 
   Query,
   Mutation,
+  Subscription,
   Self,
   ...FFXIVResolvers,
   ...Discord,

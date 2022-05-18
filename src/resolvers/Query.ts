@@ -1,5 +1,6 @@
 import { IGetCharacterParams } from "@/models/FFXIVModel";
 import { defineResolver } from "./helpers"
+import { pubSub } from "../useRedisPubSub";
 
 export const polls = defineResolver((_, args, { dataSources: { PollModel } }) => {
   return PollModel.getPolls();
@@ -23,5 +24,6 @@ export const guilds = defineResolver((_, args, { dataSources: { GuildModel } }) 
 });
 
 export const twitchStreams = defineResolver((_, args, { dataSources: { TwitchModel } }) => {
+  pubSub.publish('TEST', { test: 'test' });
   return TwitchModel.getStreams();
 });

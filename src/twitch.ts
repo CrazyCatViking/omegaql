@@ -35,3 +35,4 @@ export const useTwitchConnection = async () => {
     return accessToken;
   }
 };
+

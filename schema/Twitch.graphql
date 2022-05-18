@@ -2,6 +2,10 @@ extend type Query {
   twitchStreams: TwitchStreamResults
 }
 
+extend type Subscription {
+  test: String!
+}
+
 type TwitchStreamResults {
   items: [TwitchStream!]
   totalCount: Int!

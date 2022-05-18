@@ -22,4 +22,8 @@ export default class TwitchDataSource extends RESTSource {
   public async getStreams() {
     return this.get({ url: 'streams' });
   }
+
+  public async addChannelSubscriptions() {
+    
+  }
 }
