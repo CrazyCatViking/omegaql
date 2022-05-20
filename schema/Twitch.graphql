@@ -2,8 +2,12 @@ extend type Query {
   twitchStreams: TwitchStreamResults
 }
 
+extend type Mutation {
+  subscribeToChannel(channelName: String!): Boolean!
+}
+
 extend type Subscription {
-  test: String!
+  liveStreamFeed(guildId: Int): TwitchStream!
 }
 
 type TwitchStreamResults {
@@ -12,6 +16,9 @@ type TwitchStreamResults {
 }
 
 type TwitchStream {
+  id: String!
+  title: String!
+  description: String!
   streamer: Streamer!
 }
 

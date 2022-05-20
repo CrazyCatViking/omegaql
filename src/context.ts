@@ -3,20 +3,20 @@ import dataSources from "./dataSources";
 import { IContext, IWsContext } from "./types";
 import { useTwitchConnection } from "./twitch";
 
-const getAuthorizationToken = (req: any) => {
-  if (req.headers.authorization) {
-    return req.headers.authorization;
+const getAuthorizationToken = (headers: any) => {
+  if (headers.authorization) {
+    return headers.authorization;
   }
 
-  if (req.headers.cookie?.includes('authToken=')) {
-    return req.headers.cookie.replace('authToken=', '');
+  if (headers.cookie?.includes('authToken=')) {
+    return headers.cookie.replace('authToken=', '');
   }
 
   return '';
 }
 
 export default async (req: any, res: any): Promise<IContext> => {
-  const jwtToken = getAuthorizationToken(req);
+  const jwtToken = getAuthorizationToken(req?.headers);
   const twitchToken = await useTwitchConnection();
 
   const decodedTokens = {
@@ -36,8 +36,8 @@ export default async (req: any, res: any): Promise<IContext> => {
   };
 }
 
-export const wsContext = async (req: any, socket: any): Promise<IWsContext> => {
-  const jwtToken = getAuthorizationToken(req);
+export const wsContext = async (req: any, socket: any, connectionParams: Record<string, any>): Promise<IWsContext> => {
+  const jwtToken = getAuthorizationToken(connectionParams.headers);
   const twitchToken = await useTwitchConnection();
 
   const decodedTokens = {

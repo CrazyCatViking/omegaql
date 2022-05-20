@@ -41,6 +41,7 @@ const startServer = async () => {
   )
 
   app.get('/', expressPlayground({ endpoint: '/graphql' }));
+  useWebhooks(app);
 
   const server = app.listen(PORT, () => {
     useWebSockets(

@@ -13,7 +13,7 @@ export interface ICacheOptions {
 
 export interface IRESTParams {
   url: string;
-  params?: Record<string, string>;
+  params?: Record<string, any>;
 }
 
 export interface ICacheSettings {

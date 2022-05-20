@@ -32,9 +32,13 @@ export const login = defineResolver(async (_, { authCode }, { res, dataSources: 
   return true;
 }); 
 
-export const changeGuildContext = defineResolver(async (_, { guildId }, { dataSources: { AuthModel, GuildModel }, res, decodedTokens} ) => {
+export const changeGuildContext = defineResolver(async (_, { guildId }, { dataSources: { AuthModel }, res, decodedTokens} ) => {
   const authToken = await AuthModel.changeGuildContext(decodedTokens, guildId);
   res.cookie('authToken', authToken, { domain: process.env.DOMAIN_NAME, httpOnly: true, secure: true });
 
   return true;
+});
+
+export const subscribeToChannel = defineResolver<unknown, { channelName: string }>((_, { channelName }, { dataSources: { TwitchModel }}) => {
+  return TwitchModel.subscribeToChannel(channelName);
 });

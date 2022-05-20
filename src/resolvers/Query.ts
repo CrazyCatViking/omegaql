@@ -23,7 +23,7 @@ export const guilds = defineResolver((_, args, { dataSources: { GuildModel } }) 
   return GuildModel.getGuilds();
 });
 
-export const twitchStreams = defineResolver((_, args, { dataSources: { TwitchModel } }) => {
-  pubSub.publish('TEST', { test: 'test' });
+export const twitchStreams = defineResolver((_, args, { dataSources: { TwitchModel }, decodedTokens }) => {
+  pubSub.publish(`twitch-stream-live-feed.${decodedTokens.guildContext}`, { liveStreamFeed: { id: 'test', title: 'test' } });
   return TwitchModel.getStreams();
 });
