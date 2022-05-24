@@ -1,15 +1,21 @@
-import { createClient, RedisClientType } from 'redis';
+import Redis from 'ioredis';
 
-let client: RedisClientType<any>;
+const cacheHostName = process.env.REDIS_HOST_NAME;
+const cacheKey = process.env.REDIS_CACHE_KEY;
+
+let client: Redis;
+
+const options = {
+  host: cacheHostName,
+  port: 6380,
+  password: cacheKey,
+  tls: {
+    servername: cacheHostName,
+  }
+}
 
 export const redisConnect = async () => {
-  const cacheHostName = process.env.REDIS_HOST_NAME;
-  const cacheKey = process.env.REDIS_CACHE_KEY;
-
-  client = createClient({
-    url: `rediss://${cacheHostName}:6380`,
-    password: cacheKey,
-  });
+  client = new Redis(options);
 
   client.on('error', (error) => {
     console.log(error);
@@ -20,8 +26,6 @@ export const redisConnect = async () => {
   setInterval(() => {
     client.ping();
   }, minToMilis(5));
-
-  await client.connect(); // Connects to localhost:6379
 };
 
 export const useCache = (lifetime: number) => {
@@ -31,7 +35,7 @@ export const useCache = (lifetime: number) => {
     if (data) return JSON.parse(data);
 
     const newData = await dataAccessor();
-    client.setEx(key, lifetime, JSON.stringify(newData));
+    client.setex(key, lifetime, JSON.stringify(newData));
 
     return newData;
   };
@@ -41,7 +45,7 @@ export const useCache = (lifetime: number) => {
   }
 
   const setExData = async (key: string, data: unknown) => {
-    await client.setEx(key, lifetime, JSON.stringify(data));
+    await client.setex(key, lifetime, JSON.stringify(data));
   };
 
   const getData = async(key: string) => {
