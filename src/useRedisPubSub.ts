@@ -1,5 +1,4 @@
 import { RedisPubSub } from "graphql-redis-subscriptions";
-import { createClient } from "redis";
 import Redis from 'ioredis';
 
 export let pubSub: RedisPubSub;
