@@ -35,9 +35,9 @@ export type IDataSources = IServices & IModels;
 
 export interface IAuthTokens {
   discordUserToken: Record<string, any>;
-  discordBotToken: Record<string, string>;
+  discordBotToken?: Record<string, string>;
   guildContext: string;
-  twitchToken: string;
+  twitchToken?: string;
 }
 
 export interface IContext {

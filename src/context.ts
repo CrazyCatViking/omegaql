@@ -1,6 +1,6 @@
 import AuthModel from "./models/AuthModel";
 import dataSources from "./dataSources";
-import { IContext, IWsContext } from "./types";
+import { IAuthTokens, IContext, IWsContext } from "./types";
 import { useTwitchConnection } from "./twitch";
 
 const getAuthorizationToken = (headers: any) => {
@@ -15,18 +15,24 @@ const getAuthorizationToken = (headers: any) => {
   return '';
 }
 
-export default async (req: any, res: any): Promise<IContext> => {
-  const jwtToken = getAuthorizationToken(req?.headers);
+const setTokens = async (tokens: IAuthTokens) => {
+  if (!tokens.discordUserToken) return tokens;
+
   const twitchToken = await useTwitchConnection();
 
-  const decodedTokens = {
-    ...AuthModel.decodeToken(jwtToken),
+  return {
+    ...tokens,
     discordBotToken: {
       access_token: process.env.DISCORD_BOT_TOKEN,
       token_type: 'Bot', 
     },
     twitchToken,
-  };
+  }
+} 
+
+export default async (req: any, res: any): Promise<IContext> => {
+  const jwtToken = getAuthorizationToken(req?.headers);
+  const decodedTokens = await setTokens(AuthModel.decodeToken(jwtToken));
 
   return {
     req,
