@@ -1,4 +1,4 @@
-import { useCache } from '../src/cache';
+import { useCache } from '../src/cache/cache';
 import axios from 'axios';
 
 export interface IRESTSourceOptions {
@@ -88,7 +88,7 @@ export default class RESTSource {
     }
   }
 
-  private async getData(keyParams: string | unknown[], apiCall: () => Promise<unknown>, cacheSettings?: ICacheSettings) {
+  private async getData<TData>(keyParams: string | unknown[], apiCall: () => Promise<TData>, cacheSettings?: ICacheSettings) {
     if (!this.cacheOptions.useCache) return await apiCall();
     if (cacheSettings?.cachePolicy === 'no-cache') return await apiCall();
 

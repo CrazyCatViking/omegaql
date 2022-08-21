@@ -1,4 +1,5 @@
 import { createClient, RedisClientType } from 'redis';
+import { ICache } from './cache';
 
 let client: RedisClientType<any>;
 
@@ -24,8 +25,8 @@ export const redisConnect = async () => {
   await client.connect(); // Connects to localhost:6379
 };
 
-export const useCache = (lifetime: number) => {
-  const getCacheData = async (key: string, dataAccessor: () => Promise<unknown>) => {
+export const useRedisCache = (lifetime: number): ICache => {
+  const getCacheData = async <TData>(key: string, dataAccessor: () => Promise<TData>): Promise<TData> => {
     const data = await client.get(key);
 
     if (data) return JSON.parse(data);
@@ -37,14 +38,14 @@ export const useCache = (lifetime: number) => {
   };
 
   const setData = async(key: string, data: unknown) => {
-    await client.set(key, JSON.stringify(data));
+    client.set(key, JSON.stringify(data));
   }
 
   const setExData = async (key: string, data: unknown) => {
-    await client.setEx(key, lifetime, JSON.stringify(data));
+    client.setEx(key, lifetime, JSON.stringify(data));
   };
 
-  const getData = async(key: string) => {
+  const getData = async <TData>(key: string): Promise<TData> => {
     const data = await client.get(key);
     if (!data) return undefined;
     return JSON.parse(data);

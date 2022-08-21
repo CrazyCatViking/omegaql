@@ -9,7 +9,7 @@ import { execute, subscribe } from 'graphql';
 import { mongoDbConnect } from './mongoClient';
 import { makeSchema } from './schema';
 import context from './context';
-import { redisConnect } from './cache';
+import { createNodeCache } from './cache/nodeCache';
 
 const PORT = process.env.OMEGAQL_PORT;
 const BASE_URL = `www.${process.env.DOMAIN_NAME}`
@@ -19,7 +19,7 @@ const schema = makeSchema();
 
 const startServer = async () => {
   await mongoDbConnect();
-  await redisConnect();
+  createNodeCache();
 
   app.use(
     '/graphql',

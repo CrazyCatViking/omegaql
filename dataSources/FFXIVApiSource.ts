@@ -1,5 +1,5 @@
 import XIVAPI from 'xivapi-js';
-import { useCache } from '../src/cache';
+import { useCache } from '../src/cache/cache';
 
 export type CSV = string | string[];
 
@@ -121,7 +121,7 @@ export default class FFXIVApiSource {
     return await this.getData('lodestone', async () => this.xivApi.lodestone());
   }
 
-  private async getData(keyParams: string | unknown[], apiCall: () => Promise<unknown>) {
+  private async getData<TData>(keyParams: string | unknown[], apiCall: () => Promise<TData>) {
     const { getCacheData } = useCache(this.cahceLifetime);
     const key = this.getCacheKey(keyParams)
 
